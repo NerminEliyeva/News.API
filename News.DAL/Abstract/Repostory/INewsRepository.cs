@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace News.DAL.Abstract.Repostory
 {
-    public interface INewsRepository : IBaseRepository<Models.Entities.News>    
+    public interface INewsRepository : IBaseRepository<Models.Entities.NewsEntity>    
     {
 
     }

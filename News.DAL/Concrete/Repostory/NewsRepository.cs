@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace News.DAL.Concrete.Repostory
 {
-    public class NewsRepository : BaseRepository<Models.Entities.News> , INewsRepository
+    public class NewsRepository : BaseRepository<Models.Entities.NewsEntity> , INewsRepository
     {
         public NewsRepository(NewsDbContext newsDbContext) : base(newsDbContext)
         {

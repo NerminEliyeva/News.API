@@ -8,7 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using News.DAL.Abstract.Repostory;
 using News.DAL.Concrete.EntityFramework;
+using News.DAL.Concrete.Repostory;
+using News.Services;
+using News.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +40,9 @@ namespace News.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "News.API", Version = "v1" });
             });
+
+            services.AddTransient<INewsService, NewsService>();
+            services.AddTransient<INewsRepository, NewsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

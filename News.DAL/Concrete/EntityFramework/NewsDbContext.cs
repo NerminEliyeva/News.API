@@ -13,7 +13,7 @@ namespace News.DAL.Concrete.EntityFramework
         {
 
         }
-        public DbSet<Models.Entities.News> News { get; set; }   
+        public DbSet<Models.Entities.NewsEntity> News { get; set; }   
 
     }
 }

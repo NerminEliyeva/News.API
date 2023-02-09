@@ -10,5 +10,6 @@ namespace News.DAL.Abstract.Repostory
     {
         void Add(T entity);
         void Update(T entity);     
+        void SaveChanges();
     }
 }

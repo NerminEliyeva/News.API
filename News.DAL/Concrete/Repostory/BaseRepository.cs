@@ -29,5 +29,9 @@ namespace News.DAL.Concrete.Repostory
         {
             _dbSet.Update(entity);
         }
+        public void SaveChanges()
+        {
+            _newsDbContext.SaveChanges();
+        }
     }
 }

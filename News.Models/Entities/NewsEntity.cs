@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace News.Models.Entities
 {
-    public class News
+    public class NewsEntity
     {
         [Key]
         public int NewsId { get; set; }
