@@ -28,7 +28,7 @@ namespace News.Services
                 model.IsSuccess = false;
                 model.Obj = false;
                 if (!string.IsNullOrWhiteSpace(newNews?.NewsHeader) && !string.IsNullOrEmpty(newNews?.NewsHeader))
-                {             
+                {
                     model.Message = "Header null ola bilmez";
                     return model;
                 }
@@ -52,39 +52,14 @@ namespace News.Services
             }
             catch (Exception ex)
             {
-                model.IsSuccess=false;
-                model.Obj = false;
-                model.Message = "Xeta bas verdi"+ex.ToString();
-                return model;
-            }
-
-        }
-
-        public BaseResponsModel<NewsEntity> GetById(int id)
-        {
-            BaseResponsModel<NewsEntity> model = new BaseResponsModel<NewsEntity>();
-            try
-            {
-                var result = _newsRepository.GetById(id);
-                if (result == null)
-                {
-                    model.IsSuccess = false;
-                    model.Message = "Məlumat tapılmadı";
-                }
-                else
-                {
-                    model.IsSuccess = true;
-                    model.Obj = result;
-                }
-                return model;
-            }
-            catch (Exception)
-            {
                 model.IsSuccess = false;
-                model.Message = "Xəta baş verdi";
+                model.Obj = false;
+                model.Message = "Xeta bas verdi" + ex.ToString();
                 return model;
             }
+
         }
+
         public BaseResponsModel<bool> UpdateNews(UpdatedNews news)
         {
             BaseResponsModel<bool> model = new BaseResponsModel<bool>();
@@ -130,6 +105,47 @@ namespace News.Services
 
         }
 
-        
+        public BaseResponsModel<NewsEntity> GetById(int id)
+        {
+            BaseResponsModel<NewsEntity> model = new BaseResponsModel<NewsEntity>();
+            try
+            {
+                var result = _newsRepository.GetById(id);
+                if (result == null)
+                {
+                    model.IsSuccess = false;
+                    model.Message = "Məlumat tapılmadı";
+                }
+                else
+                {
+                    model.IsSuccess = true;
+                    model.Obj = result;
+                }
+                return model;
+            }
+            catch (Exception)
+            {
+                model.IsSuccess = false;
+                model.Message = "Xəta baş verdi";
+                return model;
+            }
+        }
+
+        public BaseResponsModel<List<NewsEntity>> GetAll()
+        {
+            BaseResponsModel<List<NewsEntity>> model = new BaseResponsModel<List<NewsEntity>>();
+            var result = _newsRepository.GetAll().Where(x=>x.Status==1).ToList();
+            if (result.Count <= 0)
+            {
+                model.Obj = null;
+                model.IsSuccess=false;
+                model.Message = "Axtarisin neticesi yoxdur";
+                return model;
+            }
+            model.Obj = result;
+            model.IsSuccess = true;
+            model.Message = "Emeliyyat ugurla basa catdi";
+            return model;
+        }
     }
 }

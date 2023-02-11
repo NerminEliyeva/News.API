@@ -13,5 +13,6 @@ namespace News.Models.Entities
         public int NewsId { get; set; }
         public string NewsHeader { get; set; }    
         public string NewsContent { get; set; }
+        public int Status { get; set; }
     }
 }

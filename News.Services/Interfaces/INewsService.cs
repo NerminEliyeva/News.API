@@ -16,5 +16,6 @@ namespace News.Services.Interfaces
         BaseResponsModel<bool> UpdateNews(UpdatedNews news);
 
         BaseResponsModel<NewsEntity> GetById(int id);
+        BaseResponsModel<List<NewsEntity>> GetAll();
     }
 }

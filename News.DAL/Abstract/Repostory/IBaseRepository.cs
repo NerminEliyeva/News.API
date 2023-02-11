@@ -13,7 +13,7 @@ namespace News.DAL.Abstract.Repostory
 
         T GetById(int id);
 
-        List<T> GetAll();
+        IEnumerable<T> GetAll();
         void SaveChanges();
     }
 }

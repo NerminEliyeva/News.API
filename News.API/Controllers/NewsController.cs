@@ -4,6 +4,7 @@ using News.Models.Request;
 using News.Models.Response;
 using News.Services;
 using News.Services.Interfaces;
+using System.Collections.Generic;
 
 namespace News.API.Controllers
 {
@@ -23,16 +24,22 @@ namespace News.API.Controllers
             return _newsServices.AddNews(news);
         }
 
+        [HttpPost("UpdateNews")]
+        public BaseResponsModel<bool> UpdateNews(UpdatedNews news)
+        {
+            return _newsServices.UpdateNews(news);
+        }
+
         [HttpGet("GetNewsById")]
         public BaseResponsModel<NewsEntity> GetNewsById([FromQuery] int id)
         {
             return _newsServices.GetById(id);
         }
 
-        [HttpPost("UpdateNews")]
-        public BaseResponsModel<bool> UpdateNews(UpdatedNews news)
+        [HttpGet("GetAll")]
+        public BaseResponsModel<List<NewsEntity>> GetAll()
         {
-            return _newsServices.UpdateNews(news);
+            return _newsServices.GetAll();
         }
     }
 }

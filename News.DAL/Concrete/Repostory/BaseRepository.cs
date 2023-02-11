@@ -37,10 +37,11 @@ namespace News.DAL.Concrete.Repostory
         {
            return _dbSet.Find(id);
         }
-
-        public List<T> GetAll()
+        public IEnumerable<T> GetAll()
         {
-           return _dbSet.ToList();
+           return _dbSet;    
         }
+
+       
     }
 }
