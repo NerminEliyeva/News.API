@@ -4,6 +4,7 @@ using News.DAL.Concrete.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +25,6 @@ namespace News.DAL.Concrete.Repostory
         {
             _dbSet.Add(entity);
         }
-
         public void Update(T entity)
         {
             _dbSet.Update(entity);
@@ -32,6 +32,15 @@ namespace News.DAL.Concrete.Repostory
         public void SaveChanges()
         {
             _newsDbContext.SaveChanges();
+        }
+        public T GetById(int id)
+        {
+           return _dbSet.Find(id);
+        }
+
+        public List<T> GetAll()
+        {
+           return _dbSet.ToList();
         }
     }
 }

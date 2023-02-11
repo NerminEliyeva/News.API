@@ -1,4 +1,6 @@
-﻿using News.Models.Request;
+﻿using News.Models.Entities;
+using News.Models.Request;
+using News.Models.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +11,10 @@ namespace News.Services.Interfaces
 {
     public interface INewsService
     {
-        bool AddNews(NewsDto newNews);
+        BaseResponsModel<bool> AddNews(NewsDto newNews);
 
-        bool UpdateNews(int id, NewsDto newNews);
+        BaseResponsModel<bool> UpdateNews(UpdatedNews news);
+
+        BaseResponsModel<NewsEntity> GetById(int id);
     }
 }

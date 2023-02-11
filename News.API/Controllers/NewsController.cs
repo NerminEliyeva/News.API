@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using News.Models.Entities;
 using News.Models.Request;
+using News.Models.Response;
 using News.Services;
 using News.Services.Interfaces;
 
@@ -16,9 +18,21 @@ namespace News.API.Controllers
         }
 
         [HttpPost("AddNews")]
-        public bool AddNews([FromBody] NewsDto news)
+        public BaseResponsModel<bool> AddNews([FromBody] NewsDto news)
         {
             return _newsServices.AddNews(news);
+        }
+
+        [HttpGet("GetNewsById")]
+        public BaseResponsModel<NewsEntity> GetNewsById([FromQuery] int id)
+        {
+            return _newsServices.GetById(id);
+        }
+
+        [HttpPost("UpdateNews")]
+        public BaseResponsModel<bool> UpdateNews(UpdatedNews news)
+        {
+            return _newsServices.UpdateNews(news);
         }
     }
 }
