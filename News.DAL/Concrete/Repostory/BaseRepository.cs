@@ -41,7 +41,5 @@ namespace News.DAL.Concrete.Repostory
         {
            return _dbSet;    
         }
-
-       
     }
 }

@@ -18,6 +18,17 @@ namespace News.API.Controllers
             _newsServices = newsServices;
         }
 
+        [HttpGet("GetNewsById")]
+        public BaseResponsModel<NewsEntity> GetNewsById([FromQuery] int id)
+        {
+            return _newsServices.GetById(id);
+        }
+
+        [HttpGet("GetAll")]
+        public BaseResponsModel<List<NewsEntity>> GetAll()
+        {
+            return _newsServices.GetAll();
+        }
         [HttpPost("AddNews")]
         public BaseResponsModel<bool> AddNews([FromBody] NewsDto news)
         {
@@ -30,16 +41,11 @@ namespace News.API.Controllers
             return _newsServices.UpdateNews(news);
         }
 
-        [HttpGet("GetNewsById")]
-        public BaseResponsModel<NewsEntity> GetNewsById([FromQuery] int id)
+        [HttpPost("Delete")]
+        public BaseResponsModel<bool> Delete(int id)
         {
-            return _newsServices.GetById(id);
+            return _newsServices.Delete(id);
         }
 
-        [HttpGet("GetAll")]
-        public BaseResponsModel<List<NewsEntity>> GetAll()
-        {
-            return _newsServices.GetAll();
-        }
     }
 }

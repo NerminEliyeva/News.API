@@ -14,7 +14,6 @@ namespace News.DAL.Concrete.Repostory
         {
 
         }
-
-
+  
     }
 }

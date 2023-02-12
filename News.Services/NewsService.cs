@@ -27,12 +27,12 @@ namespace News.Services
             {
                 model.IsSuccess = false;
                 model.Obj = false;
-                if (!string.IsNullOrWhiteSpace(newNews?.NewsHeader) && !string.IsNullOrEmpty(newNews?.NewsHeader))
+                if (string.IsNullOrWhiteSpace(newNews?.NewsHeader) || string.IsNullOrEmpty(newNews?.NewsHeader))
                 {
                     model.Message = "Header null ola bilmez";
                     return model;
                 }
-                if (!string.IsNullOrWhiteSpace(newNews?.NewsContent) && !string.IsNullOrEmpty(newNews?.NewsContent))
+                if (string.IsNullOrWhiteSpace(newNews?.NewsContent) || string.IsNullOrEmpty(newNews?.NewsContent))
                 {
                     model.Message = "Content null ola bilmez";
                     return model;
@@ -40,8 +40,9 @@ namespace News.Services
                 _newsRepository.Add(new()
                 {
                     NewsHeader = newNews.NewsHeader,
-                    NewsContent = newNews.NewsContent
-                });
+                    NewsContent = newNews.NewsContent,
+                    Status = 1
+                }); 
 
                 _newsRepository.SaveChanges();
 
@@ -134,11 +135,11 @@ namespace News.Services
         public BaseResponsModel<List<NewsEntity>> GetAll()
         {
             BaseResponsModel<List<NewsEntity>> model = new BaseResponsModel<List<NewsEntity>>();
-            var result = _newsRepository.GetAll().Where(x=>x.Status==1).ToList();
+            var result = _newsRepository.GetAll().Where(x => x.Status == 1).ToList();
             if (result.Count <= 0)
             {
                 model.Obj = null;
-                model.IsSuccess=false;
+                model.IsSuccess = false;
                 model.Message = "Axtarisin neticesi yoxdur";
                 return model;
             }
@@ -146,6 +147,45 @@ namespace News.Services
             model.IsSuccess = true;
             model.Message = "Emeliyyat ugurla basa catdi";
             return model;
+        }
+
+        public BaseResponsModel<bool> Delete(int id)
+        {
+            BaseResponsModel<bool> model = new BaseResponsModel<bool>();
+            try
+            {
+                var deletedObj = _newsRepository.GetById(id);
+                if (deletedObj is null)
+                {
+                    model.IsSuccess = false;
+                    model.Obj= false;
+                    model.Message = "Melumat tapilmadi";
+                    return model;
+                }
+                if (deletedObj.Status==0)
+                {
+                    model.IsSuccess = false;
+                    model.Obj = false;
+                    model.Message = "Melumat tapilmadi";
+                    return model;
+                }
+
+                deletedObj.Status = 0;
+                _newsRepository.SaveChanges();
+
+                model.IsSuccess = true;
+                model.Obj = true;
+                model.Message = "Silindi";
+                return model;
+
+            }
+            catch (Exception ex)
+            {
+                model.IsSuccess = false;
+                model.Obj = false;
+                model.Message = "Xeta bas verdi"+ex.ToString();
+                return model;
+            }
         }
     }
 }
