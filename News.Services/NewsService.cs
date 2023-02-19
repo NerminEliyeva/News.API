@@ -42,7 +42,7 @@ namespace News.Services
                     NewsHeader = newNews.NewsHeader,
                     NewsContent = newNews.NewsContent,
                     Status = 1
-                }); 
+                });
 
                 _newsRepository.SaveChanges();
 
@@ -158,11 +158,11 @@ namespace News.Services
                 if (deletedObj is null)
                 {
                     model.IsSuccess = false;
-                    model.Obj= false;
+                    model.Obj = false;
                     model.Message = "Melumat tapilmadi";
                     return model;
                 }
-                if (deletedObj.Status==0)
+                if (deletedObj.Status == 0)
                 {
                     model.IsSuccess = false;
                     model.Obj = false;
@@ -183,9 +183,37 @@ namespace News.Services
             {
                 model.IsSuccess = false;
                 model.Obj = false;
-                model.Message = "Xeta bas verdi"+ex.ToString();
+                model.Message = "Xeta bas verdi" + ex.ToString();
                 return model;
             }
+        }
+
+        public BaseResponsModel<int> FactMethod(int x)
+        {
+            BaseResponsModel<int> model = new BaseResponsModel<int>();
+            int fact = 1;
+            if (x < 0)
+            {
+                model.IsSuccess = false;
+                model.Message = "xeta";
+                return model;
+            }
+            if (x == 0)
+            {
+                fact = 1;
+                model.Obj = fact;
+                model.Message = "ugurludur";
+                model.IsSuccess = true;
+                return model;
+            }
+            for (int i = 1; i <= x; i++)
+            {
+                fact *= i;
+            }
+            model.Obj = fact;
+            model.Message = "ugurludur";
+            model.IsSuccess = true;
+            return model;
         }
     }
 }

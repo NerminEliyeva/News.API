@@ -12,11 +12,10 @@ namespace News.Services.Interfaces
     public interface INewsService
     {
         BaseResponsModel<bool> AddNews(NewsDto newNews);
-
         BaseResponsModel<bool> UpdateNews(UpdatedNews news);
-
         BaseResponsModel<NewsEntity> GetById(int id);
         BaseResponsModel<List<NewsEntity>> GetAll();
         BaseResponsModel<bool> Delete(int id);
+        BaseResponsModel<int> FactMethod(int x);
     }
 }
