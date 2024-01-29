@@ -10,9 +10,13 @@ namespace News.Models.Entities
     public class NewsEntity
     {
         [Key]
-        public int NewsId { get; set; }
-        public string NewsHeader { get; set; }    
-        public string NewsContent { get; set; }
+        public int Id { get; set; }
+        public string Header { get; set; }    
+        public string Content { get; set; }
         public int Status { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public string CreatedUser { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public string ModifiedUser { get; set; }
     }
 }

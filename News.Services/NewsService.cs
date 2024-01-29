@@ -39,9 +39,11 @@ namespace News.Services
                 }
                 _newsRepository.Add(new()
                 {
-                    NewsHeader = newNews.NewsHeader,
-                    NewsContent = newNews.NewsContent,
-                    Status = 1
+                    Header = newNews.NewsHeader,
+                    Content = newNews.NewsContent,
+                    Status = 1,
+                    CreatedDate = DateTime.Now,
+                    CreatedUser = "admin"
                 });
 
                 _newsRepository.SaveChanges();
@@ -82,13 +84,16 @@ namespace News.Services
                 }
                 if (!string.IsNullOrEmpty(news.NewsHeader) && !string.IsNullOrWhiteSpace(news.NewsHeader))
                 {
-                    oldNews.NewsHeader = news.NewsHeader;
+                    oldNews.Header = news.NewsHeader;
                 }
 
                 if (!string.IsNullOrEmpty(news.NewsContent) && !string.IsNullOrWhiteSpace(news.NewsContent))
                 {
-                    oldNews.NewsContent = news.NewsContent;
+                    oldNews.Content = news.NewsContent;
                 }
+
+                oldNews.ModifiedDate = DateTime.Now;
+                oldNews.ModifiedUser = "admin";
                 _newsRepository.SaveChanges();
 
                 model.IsSuccess = true;
@@ -188,32 +193,32 @@ namespace News.Services
             }
         }
 
-        public BaseResponsModel<int> FactMethod(int x)
-        {
-            BaseResponsModel<int> model = new BaseResponsModel<int>();
-            int fact = 1;
-            if (x < 0)
-            {
-                model.IsSuccess = false;
-                model.Message = "xeta";
-                return model;
-            }
-            if (x == 0)
-            {
-                fact = 1;
-                model.Obj = fact;
-                model.Message = "ugurludur";
-                model.IsSuccess = true;
-                return model;
-            }
-            for (int i = 1; i <= x; i++)
-            {
-                fact *= i;
-            }
-            model.Obj = fact;
-            model.Message = "ugurludur";
-            model.IsSuccess = true;
-            return model;
-        }
+        //public BaseResponsModel<int> FactMethod(int x)
+        //{
+        //    BaseResponsModel<int> model = new BaseResponsModel<int>();
+        //    int fact = 1;
+        //    if (x < 0)
+        //    {
+        //        model.IsSuccess = false;
+        //        model.Message = "xeta";
+        //        return model;
+        //    }
+        //    if (x == 0)
+        //    {
+        //        fact = 1;
+        //        model.Obj = fact;
+        //        model.Message = "ugurludur";
+        //        model.IsSuccess = true;
+        //        return model;
+        //    }
+        //    for (int i = 1; i <= x; i++)
+        //    {
+        //        fact *= i;
+        //    }
+        //    model.Obj = fact;
+        //    model.Message = "ugurludur";
+        //    model.IsSuccess = true;
+        //    return model;
+        //}
     }
 }
